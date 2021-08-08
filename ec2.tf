@@ -1,24 +1,24 @@
-resource "aws_instance" "r100c96" {
-  ami               = "ami-0a9d27a9f4f5c0efc"
+resource "aws_instance" "ec2" {
+  ami               = "ami-04db49c0fb2215364"
   instance_type     = "t2.micro"
-  availability_zone = "ap-south-1b"
-  key_name          = "aws-exam-testing"
+  availability_zone = "ap-south-1a"
+  key_name          = "terraform-ansible-ec2"
   tags = {
-    Name = "Terraform-diff-linux"
+    Name = "Terraform-ansible-ec2"
   }
 
   provisioner "remote-exec" {
-    inline = [ "sudo hostnamectl set-hostname cloudEc2.technix.com" ]
+    inline = [ "sudo hostnamectl set-hostname myec2.cloudbook.com" ]
     connection {
-      host        = aws_instance.r100c96.public_dns
+      host        = aws_instance.ec2.public_dns
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("./aws-exam-testing.pem")
+      private_key = file("./terraform-ansible-ec2.pem")
     }
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.r100c96.public_dns} > inventory"
+    command = "echo ${aws_instance.ec2.public_dns} > inventory"
   }
 
   provisioner "local-exec" {
@@ -27,9 +27,9 @@ resource "aws_instance" "r100c96" {
 }
 
 output "ip" {
-  value = aws_instance.r100c96.public_ip
+  value = aws_instance.ec2.public_ip
 }
 
 output "publicName" {
-  value = aws_instance.r100c96.public_dns
+  value = aws_instance.ec2.public_dns
 }
