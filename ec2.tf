@@ -9,8 +9,8 @@ resource "aws_instance" "ec2" {
 
   provisioner "remote-exec" {
     inline = [ 
-      "sudo hostnamectl set-hostname myec2.cloudbook.com",
-      "chmod 700 /var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem"
+      "sudo hostnamectl set-hostname myec2.cloudbook.com"
+      
     ]
     connection {
       host        = aws_instance.ec2.public_dns
@@ -24,9 +24,6 @@ resource "aws_instance" "ec2" {
     command = "echo ${aws_instance.ec2.public_dns} > inventory"
   }
 
-  provisioner "local-exec" {
-    command = "ansible all -m shell -a 'yum -y install httpd; systemctl restart httpd'"
-  }
 }
 
 output "ip" {
