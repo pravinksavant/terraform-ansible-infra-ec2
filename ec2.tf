@@ -9,7 +9,7 @@ resource "aws_instance" "ec2" {
 
   provisioner "remote-exec" {
     inline = [ 
-      "sudo hostnamectl set-hostname myec2.cloudbook.com"
+      "sudo hostnamectl set-hostname myec2.cloudbook.com",
       "sudo chmod 600 terraform-ansible-ec2.pem"
     ]
     connection {
