@@ -16,7 +16,7 @@ resource "aws_instance" "ec2" {
       host        = aws_instance.ec2.public_dns
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("./terraform-ansible-ec2.pem")
+      private_key = file("/var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem")
     }
   }
 
