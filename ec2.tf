@@ -23,7 +23,16 @@ resource "aws_instance" "ec2" {
   provisioner "local-exec" {
     command = "echo ${aws_instance.ec2.public_dns} > inventory"
   }
+  
+  provisioner "local-exec" {
+    command = "cp "/var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem /tmp/"
+	  
+  }
+  
 
+  provisioner "local-exec" {
+    command = "ansible all -m shell -a 'yum -y install httpd; systemctl restart httpd'"
+  }
 }
 
 output "ip" {
