@@ -25,7 +25,7 @@ resource "aws_instance" "ec2" {
   }
   
   provisioner "local-exec" {
-    command = "cp "/var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem /tmp/"
+    command = "cp /var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem /tmp/"
 	  
   }
   
