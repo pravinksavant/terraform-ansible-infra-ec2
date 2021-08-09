@@ -1,5 +1,5 @@
 resource "aws_instance" "ec2" {
-  ami               = "ami-09b429d0b1d601b97"
+  ami               = "ami-04db49c0fb2215364"
   instance_type     = "t2.micro"
   availability_zone = "ap-south-1a"
   key_name          = "terraform-ansible-ec2"
@@ -28,7 +28,10 @@ resource "aws_instance" "ec2" {
     command = "cp /var/lib/jenkins/workspace/Demo-AWS-EC2-Infrastructure-Pipeline/terraform-ansible-ec2.pem /tmp/"
 	  
   }
-  
+  provisioner "local-exec" {
+    command = "chmod 600 /tmp/terraform-ansible-ec2.pem"
+	  
+  }
 
   provisioner "local-exec" {
     command = "ansible all -m shell -a 'yum -y install httpd; systemctl restart httpd'"
