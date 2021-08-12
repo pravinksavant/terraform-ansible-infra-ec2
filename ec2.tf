@@ -34,7 +34,8 @@ resource "aws_instance" "ec2" {
   }
 
   provisioner "local-exec" {
-    command = "ansible all -m shell -a 'yum -y install httpd; systemctl restart httpd'"
+    command = "ansible all -m shell -a 'yum -y install httpd; systemctl restart httpd; yum install docker -y; systemctl restart docker'"
+    
   }
 }
 
