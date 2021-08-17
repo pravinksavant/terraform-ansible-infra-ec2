@@ -2,7 +2,7 @@ resource "aws_instance" "ec2" {
   ami               = "ami-04db49c0fb2215364"
   instance_type     = "t2.micro"
   availability_zone = "ap-south-1a"
-  key_name          = "terraform-ansible-ec2"
+  key_name          = "terraform-ansible-ec2-main"
   tags = {
     Name = "Terraform-ansible-ec2"
   }
